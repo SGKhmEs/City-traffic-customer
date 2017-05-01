@@ -2,14 +2,36 @@ package com.company.city_traffic_customer.main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.widget.ListView;
+import android.widget.TabHost;
 
 import com.company.city_traffic_customer.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    TabHost tabHost;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        createTabHost();
+    }
+
+    private void createTabHost() {
+        tabHost = (TabHost) findViewById(R.id.tabHost);
+        tabHost.setup();
+        TabHost.TabSpec tabSpec;
+        tabSpec = tabHost.newTabSpec("tag1");
+        tabSpec.setIndicator("",getResources().getDrawable(R.drawable.map));
+        tabSpec.setContent(R.id.tab1);
+        tabHost.addTab(tabSpec);
+        tabSpec = tabHost.newTabSpec("tag2");
+        tabSpec.setIndicator("",getResources().getDrawable(R.drawable.list));
+        tabSpec.setContent(R.id.tab2);
+        tabHost.addTab(tabSpec);
     }
 }
