@@ -1,12 +1,24 @@
 package com.company.city_traffic_customer.model;
 
-public class Station {
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+
+@Table(name = "Stations")
+public class Station extends Model {
+
+    @Column(name = "name")
     private String name;
-    private int latitude;
-    private int longitude;
+    @Column(name = "latitude")
+    private double latitude;
+    @Column(name = "longitude")
+    private double longitude;
 
-    public Station(String name, int latitude, int longitude) {
+    public Station() {
+    }
+
+    public Station(String name, double latitude, double longitude) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -20,7 +32,7 @@ public class Station {
         this.name = name;
     }
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -28,7 +40,7 @@ public class Station {
         this.latitude = latitude;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 

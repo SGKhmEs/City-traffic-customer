@@ -1,14 +1,23 @@
 package com.company.city_traffic_customer.model;
 
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+
+@Table(name = "RouteTaxis")
 public class RouteTaxi {
 
+    @Column(name = "registrationMark")
     private String registrationMark;
+    @Column(name = "routeNumber")
     private String routeNumber;
+    @Column(name = "way")
     private int way;
-    private int latitude;
-    private int longitude;
+    @Column(name = "latitude")
+    private double latitude;
+    @Column(name = "longitude")
+    private double longitude;
 
-    public RouteTaxi(String registrationMark, String routeNumber, int way, int latitude, int longitude) {
+    public RouteTaxi(String registrationMark, String routeNumber, int way, double latitude, double longitude) {
         this.registrationMark = registrationMark;
         this.routeNumber = routeNumber;
         this.way = way;
@@ -40,7 +49,7 @@ public class RouteTaxi {
         this.way = way;
     }
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -48,7 +57,7 @@ public class RouteTaxi {
         this.latitude = latitude;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
