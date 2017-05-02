@@ -10,10 +10,15 @@ import android.widget.ListView;
 import android.widget.TabHost;
 
 import com.company.city_traffic_customer.R;
+import com.company.city_traffic_customer.model.RouteTaxi;
+import com.company.city_traffic_customer.model.Station;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements IMainActivity{
 
     TabHost tabHost;
+    IMainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +28,15 @@ public class MainActivity extends AppCompatActivity {
         createTabHost();
 
         createMapFragment();
+
+        presenter = new MainPresenter(this);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
 
     private void createTabHost() {
         tabHost = (TabHost) findViewById(R.id.tabHost);
