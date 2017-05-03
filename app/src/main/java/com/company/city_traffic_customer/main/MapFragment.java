@@ -34,6 +34,7 @@ public class MapFragment extends Fragment implements IMapFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_map, container, false);
+
         mMapView = (MapView) view.findViewById(R.id.mapview);
         mMapView.onCreate(savedInstanceState);
 
@@ -75,6 +76,7 @@ public class MapFragment extends Fragment implements IMapFragment {
 
     @Override
     public void showRouteTaxis(List<RouteTaxi> routeTaxis) {
+
 
     }
 }
