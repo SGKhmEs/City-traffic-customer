@@ -34,8 +34,8 @@ public class SearchAdapter extends BaseAdapter implements Filterable {
     }
 
     @Override
-    public Object getItem(int position) {
-        return position;
+    public String getItem(int position) {
+        return arrayList.get(position);
     }
 
     @Override
@@ -59,7 +59,6 @@ public class SearchAdapter extends BaseAdapter implements Filterable {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        Log.w(TAG, "getView: " + arrayList.get(position));
         holder.textView.setText(arrayList.get(position));
         return convertView;
     }
@@ -103,9 +102,5 @@ public class SearchAdapter extends BaseAdapter implements Filterable {
                 return results;
             }
         };
-    }
-
-    public String getItemString(int position) {
-        return arrayList.get(position);
     }
 }
