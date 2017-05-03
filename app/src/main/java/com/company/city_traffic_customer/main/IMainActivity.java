@@ -7,4 +7,5 @@ import java.util.List;
 
 interface IMainActivity {
     void setSearchList(List<String> stations);
+    void startActivityTraffic(String station);
 }

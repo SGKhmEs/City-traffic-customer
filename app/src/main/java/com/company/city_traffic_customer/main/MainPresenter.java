@@ -40,4 +40,9 @@ class MainPresenter implements IMainPresenter {
             }
         }.execute();
     }
+
+    @Override
+    public void startActivityTraffic(String station) {
+        activity.startActivityTraffic(station);
+    }
 }

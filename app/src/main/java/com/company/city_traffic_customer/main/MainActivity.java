@@ -19,6 +19,7 @@ import android.widget.TabHost;
 import com.company.city_traffic_customer.R;
 import com.company.city_traffic_customer.main.adapter.SearchAdapter;
 import com.company.city_traffic_customer.model.Station;
+import com.company.city_traffic_customer.traffic.TrafficActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
         searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
             @Override
             public boolean onSuggestionClick(int position) {
-                Log.w(TAG, "onSuggestionClick: ");
+                presenter.startActivityTraffic(searchAdapter.getItem(position));
                 return true;
             }
 
@@ -118,4 +119,13 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
         searchAutoComplete.setAdapter(searchAdapter);
         Log.w(TAG, "setSearchList: ");
     }
+
+    @Override
+    public void startActivityTraffic(String station) {
+        Intent intent = new Intent(this, TrafficActivity.class);
+        intent.putExtra("Station", station);
+        startActivity(intent);
+    }
+
+
 }
