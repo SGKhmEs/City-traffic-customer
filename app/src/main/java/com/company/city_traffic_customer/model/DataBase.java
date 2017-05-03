@@ -1,16 +1,20 @@
 package com.company.city_traffic_customer.model;
 
 
+import android.util.Log;
+
 import com.activeandroid.query.Select;
 
 import java.util.List;
 
 public class DataBase {
 
+    private static final String TAG = "log";
     private static DataBase dataBase;
 
     private DataBase(){
         addToDB();
+        Log.w(TAG, "DataBase: ");
     }
 
     public static DataBase getDataBase() {

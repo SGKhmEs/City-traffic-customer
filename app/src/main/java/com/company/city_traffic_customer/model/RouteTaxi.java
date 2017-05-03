@@ -1,10 +1,11 @@
 package com.company.city_traffic_customer.model;
 
+import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
 @Table(name = "RouteTaxis")
-public class RouteTaxi {
+public class RouteTaxi extends Model {
 
     @Column(name = "registrationMark")
     private String registrationMark;
@@ -16,6 +17,10 @@ public class RouteTaxi {
     private double latitude;
     @Column(name = "longitude")
     private double longitude;
+
+    public RouteTaxi() {
+        super();
+    }
 
     public RouteTaxi(String registrationMark, String routeNumber, int way, double latitude, double longitude) {
         this.registrationMark = registrationMark;

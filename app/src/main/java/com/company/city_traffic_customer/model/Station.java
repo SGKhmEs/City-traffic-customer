@@ -16,6 +16,7 @@ public class Station extends Model {
     private double longitude;
 
     public Station() {
+        super();
     }
 
     public Station(String name, double latitude, double longitude) {
