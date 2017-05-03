@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
         createMapFragment();
 
         presenter = new MainPresenter(this);
+
     }
 
     @Override
@@ -59,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
         searchView = (SearchView) item.getActionView();
 
         searchAutoComplete = (SearchAutoComplete) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
@@ -76,27 +76,13 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
                 return true;
             }
         });
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
+        presenter.setSearchList();
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        presenter.setSearchList();
+    protected void onResume() {
+        super.onResume();
     }
 
 
