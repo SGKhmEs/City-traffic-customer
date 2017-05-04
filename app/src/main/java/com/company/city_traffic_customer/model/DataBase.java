@@ -13,7 +13,6 @@ public class DataBase {
     private static DataBase dataBase;
 
     private DataBase(){
-        addToDB();
         Log.w(TAG, "DataBase: ");
     }
 
@@ -32,6 +31,6 @@ public class DataBase {
 
     private void addToDB(){
         new Station("Карпенка до центру", 49.541851, 25.579770).save();
-        new Station("Карпенка з центру", 49.542352, 25.581641).save();
+        new Station("Руська", 49.550512, 25.587627).save();
     }
 }
