@@ -1,8 +1,12 @@
 package com.company.city_traffic_customer.main;
 
 
+import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +22,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
@@ -25,8 +30,10 @@ import java.util.List;
 
 public class MapFragment extends Fragment implements IMapFragment {
 
+    private static final String TAG = "log";
     MapView mMapView;
     IMapPresenter presenter;
+    ProgressDialog dialog;
 
     public MapFragment() {
     }
@@ -39,6 +46,9 @@ public class MapFragment extends Fragment implements IMapFragment {
         mMapView.onCreate(savedInstanceState);
 
         mMapView.onResume();
+
+        dialog = new ProgressDialog(getActivity());
+        dialog.setTitle("waiting ... ");
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -65,9 +75,17 @@ public class MapFragment extends Fragment implements IMapFragment {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 for(int i = 0; i < stations.size(); i++){
+                    googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+                            presenter.showRouteTaxis(marker.getTitle());
+                            return false;
+                        }
+                    });
                     LatLng busStantion = new LatLng(stations.get(i).getLatitude(), stations.get(i).getLongitude());
                     googleMap.addMarker(new MarkerOptions()
                             .position(busStantion)
+                            .title(stations.get(i).getName())
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.busstop)));
                 }
             }
@@ -75,8 +93,31 @@ public class MapFragment extends Fragment implements IMapFragment {
     }
 
     @Override
-    public void showRouteTaxis(List<RouteTaxi> routeTaxis) {
+    public void showRouteTaxis(final List<RouteTaxi> routeTaxis) {
+        mMapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                Bitmap bitmap;
+                for(int i = 0; i < routeTaxis.size(); i++){
+                    bitmap =  BitmapFactory.decodeResource(getResources(), R.drawable.bus);
+                    LatLng busStantion = new LatLng(routeTaxis.get(i).getLatitude(), routeTaxis.get(i).getLongitude());
+                    googleMap.addMarker(new MarkerOptions()
+                            .position(busStantion)
+                            .title(routeTaxis.get(i).getRouteNumber())
+                            .icon(BitmapDescriptorFactory.fromBitmap(bitmap)).rotation(routeTaxis.get(i).getWay()));
+                }
+            }
+        });
 
+    }
 
+    @Override
+    public void showProgresDialog() {
+        dialog.show();
+    }
+
+    @Override
+    public void hideProgresDialog() {
+        dialog.dismiss();
     }
 }
